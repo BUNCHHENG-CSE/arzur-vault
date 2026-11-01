@@ -1,0 +1,160 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id                  String      @id
+  name                String
+  email               String      @unique
+  emailVerified       Boolean     @default(false)
+  image               String?
+  createdAt           DateTime    @default(now())
+  updatedAt           DateTime    @updatedAt
+
+  // Zero-Knowledge Master Vault Verifier (Encrypted known string "ARZUR_VAULT_VERIFIED" to check if Master Passphrase is correct)
+  vaultVerifierCipher String?     @db.Text
+  vaultVerifierIv     String?
+  vaultVerifierSalt   String?
+
+  // Anti-Coercion / Decoy Duress Vault Mode
+  duressEnabled       Boolean     @default(false)
+  duressVerifierCipher String?    @db.Text
+  duressVerifierIv    String?
+  duressVerifierSalt  String?
+
+  sessions            Session[]
+  accounts            Account[]
+  vaultItems          VaultItem[]
+  vaultSends          VaultSend[]
+
+  @@map("user")
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@map("account")
+}
+
+model Verification {
+  id         String    @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime? @default(now())
+  updatedAt  DateTime? @updatedAt
+
+  @@map("verification")
+}
+
+enum VaultItemType {
+  PASSWORD
+  CRYPTO_WALLET
+  SECURE_NOTE
+  PAYMENT_CARD
+  IDENTITY
+  PAY_PIN
+}
+
+model VaultItem {
+  id          String        @id @default(cuid())
+  userId      String
+  user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type        VaultItemType
+  
+  // Non-sensitive metadata used for UI listing & filtering
+  title       String        // e.g., "Binance Exchange", "Ledger Nano X Main", "GitHub"
+  subtitle    String?       // e.g., "user@email.com", "Ethereum / Solana", "SSH Key"
+  url         String?       // e.g., "https://github.com"
+  category    String?       // e.g., "DeFi", "Social", "Work", "Banking"
+  tags        String[]      @default([])
+  favorite    Boolean       @default(false)
+  deletedAt   DateTime?     // Soft delete timestamp for Trash bin
+  isDecoy     Boolean       @default(false) // Decoy item for duress / coercion mode
+
+  // Strictly Encrypted Client-Side Payload (AES-256-GCM)
+  ciphertext  String        @db.Text
+  iv          String        // Base64 encoded 12-byte IV
+  salt        String        // Base64 encoded 16-byte PBKDF2 salt
+
+  attachments VaultAttachment[]
+
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@index([userId, type])
+  @@index([userId, favorite])
+  @@index([userId, deletedAt])
+  @@index([userId, isDecoy])
+  @@map("vault_item")
+}
+
+model VaultAttachment {
+  id          String    @id @default(cuid())
+  vaultItemId String
+  vaultItem   VaultItem @relation(fields: [vaultItemId], references: [id], onDelete: Cascade)
+  fileName    String
+  fileSize    Int
+  mimeType    String
+  ciphertext  String    @db.Text // Encrypted file bytes (Base64)
+  iv          String    // Base64 encoded 12-byte IV
+  salt        String    // Base64 encoded 16-byte salt
+  createdAt   DateTime  @default(now())
+
+  @@index([vaultItemId])
+  @@map("vault_attachment")
+}
+
+model VaultSend {
+  id                String    @id @default(cuid())
+  userId            String
+  user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title             String
+  ciphertext        String    @db.Text
+  iv                String
+  salt              String?
+  burnOnRead        Boolean   @default(true)
+  maxViews          Int       @default(1)
+  viewCount         Int       @default(0)
+  expiresAt         DateTime
+  passwordProtected Boolean   @default(false)
+  passwordSalt      String?
+  createdAt         DateTime  @default(now())
+
+  @@index([userId])
+  @@map("vault_send")
+}

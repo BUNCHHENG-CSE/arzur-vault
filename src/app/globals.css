@@ -1,0 +1,443 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-mono);
+  --font-heading: var(--font-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/* Light Mode — Crisp Architectural Precision */
+:root {
+  --background: oklch(0.984 0.002 247.858);
+  --foreground: oklch(0.145 0.005 285.823);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0.005 285.823);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0.005 285.823);
+  --primary: oklch(0.596 0.145 163.225);
+  --primary-foreground: oklch(0.99 0.002 163.225);
+  --secondary: oklch(0.955 0.003 264.542);
+  --secondary-foreground: oklch(0.21 0.006 285.885);
+  --muted: oklch(0.952 0.003 264.542);
+  --muted-foreground: oklch(0.47 0.015 285.938);
+  --accent: oklch(0.952 0.004 264.542);
+  --accent-foreground: oklch(0.18 0.006 285.885);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.898 0.005 286.32);
+  --input: oklch(0.898 0.005 286.32);
+  --ring: oklch(0.596 0.145 163.225);
+  --chart-1: oklch(0.596 0.145 163.225);
+  --chart-2: oklch(0.666 0.179 58.318);
+  --chart-3: oklch(0.55 0.118 184.704);
+  --chart-4: oklch(0.58 0.24 303.9);
+  --chart-5: oklch(0.59 0.22 16.439);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.992 0.001 247.858);
+  --sidebar-foreground: oklch(0.145 0.005 285.823);
+  --sidebar-primary: oklch(0.596 0.145 163.225);
+  --sidebar-primary-foreground: oklch(0.99 0.002 163.225);
+  --sidebar-accent: oklch(0.952 0.004 264.542);
+  --sidebar-accent-foreground: oklch(0.145 0.005 285.823);
+  --sidebar-border: oklch(0.905 0.005 286.32);
+  --sidebar-ring: oklch(0.596 0.145 163.225);
+}
+
+/* Dark Mode — Deep Obsidian Cybersecurity Theme */
+.dark {
+  --background: oklch(0.135 0.005 285.823);
+  --foreground: oklch(0.968 0.002 286.375);
+  --card: oklch(0.178 0.006 285.885);
+  --card-foreground: oklch(0.968 0.002 286.375);
+  --popover: oklch(0.182 0.006 285.885);
+  --popover-foreground: oklch(0.968 0.002 286.375);
+  --primary: oklch(0.696 0.17 162.48);
+  --primary-foreground: oklch(0.145 0.02 162.48);
+  --secondary: oklch(0.235 0.006 286.033);
+  --secondary-foreground: oklch(0.968 0.002 286.375);
+  --muted: oklch(0.225 0.006 286.033);
+  --muted-foreground: oklch(0.685 0.015 286.067);
+  --accent: oklch(0.24 0.006 286.033);
+  --accent-foreground: oklch(0.968 0.002 286.375);
+  --destructive: oklch(0.637 0.237 25.331);
+  --border: oklch(0.274 0.006 286.033);
+  --input: oklch(0.274 0.006 286.033);
+  --ring: oklch(0.696 0.17 162.48);
+  --chart-1: oklch(0.696 0.17 162.48);
+  --chart-2: oklch(0.769 0.188 70.08);
+  --chart-3: oklch(0.6 0.118 184.704);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.155 0.005 285.823);
+  --sidebar-foreground: oklch(0.968 0.002 286.375);
+  --sidebar-primary: oklch(0.696 0.17 162.48);
+  --sidebar-primary-foreground: oklch(0.145 0.02 162.48);
+  --sidebar-accent: oklch(0.23 0.006 286.033);
+  --sidebar-accent-foreground: oklch(0.968 0.002 286.375);
+  --sidebar-border: oklch(0.26 0.006 286.033);
+  --sidebar-ring: oklch(0.696 0.17 162.48);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans;
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground antialiased transition-colors duration-200;
+  }
+}
+
+/* ==========================================================================
+   Modern Minimal Cyber Scrollbars (Eliminates clunky Windows scrollbars)
+   ========================================================================== */
+/* WebKit / Chromium / Blink / Safari:
+   Pure WebKit styling without scrollbar-width / scrollbar-color collisions
+   to permanently eliminate Windows native arrow buttons and clunky rails. */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(140, 140, 140, 0.3);
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  background-clip: padding-box;
+  transition: background-color 0.15s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(140, 140, 140, 0.55);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: rgba(140, 140, 140, 0.75);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  background-clip: padding-box;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.dark ::-webkit-scrollbar-thumb:active {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Eliminate clunky Windows scrollbar arrow triangles completely */
+::-webkit-scrollbar-button,
+::-webkit-scrollbar-button:single-button,
+::-webkit-scrollbar-button:start,
+::-webkit-scrollbar-button:end,
+::-webkit-scrollbar-button:vertical:decrement,
+::-webkit-scrollbar-button:vertical:increment,
+::-webkit-scrollbar-button:horizontal:decrement,
+::-webkit-scrollbar-button:horizontal:increment {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* ==========================================================================
+   .custom-scrollbar — Enhanced Floating Cyber Scrollbar
+   ========================================================================== */
+.custom-scrollbar {
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(140, 140, 140, 0.3);
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  background-clip: padding-box;
+  transition: background-color 0.15s ease;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(140, 140, 140, 0.6);
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  background-clip: padding-box;
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(245, 158, 11, 0.65); /* Subtle Amber/Gold glow on hover for vault secrets */
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb:active {
+  background: rgba(245, 158, 11, 0.9);
+}
+
+.custom-scrollbar::-webkit-scrollbar-button,
+.custom-scrollbar::-webkit-scrollbar-button:single-button,
+.custom-scrollbar::-webkit-scrollbar-button:start,
+.custom-scrollbar::-webkit-scrollbar-button:end,
+.custom-scrollbar::-webkit-scrollbar-button:vertical:decrement,
+.custom-scrollbar::-webkit-scrollbar-button:vertical:increment {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.custom-scrollbar::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* ==========================================================================
+   .no-scrollbar — Completely Hides Visible Scrollbar While Preserving Scrolling
+   ========================================================================== */
+.no-scrollbar {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* Firefox fallback — only for browsers without ::-webkit-scrollbar support */
+@supports not selector(::-webkit-scrollbar) {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(140, 140, 140, 0.3) transparent;
+  }
+  .dark * {
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+  }
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
+  }
+}
+
+.cyber-grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(24, 24, 27, 0.042) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(24, 24, 27, 0.042) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.dark .cyber-grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.032) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.032) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* ==========================================================================
+   Sonner Toast Dark Mode & Cybersecurity Optimizations
+   ========================================================================== */
+
+/* Dark mode toast variables & rich-color palettes */
+.dark [data-sonner-toaster],
+[data-sonner-toaster][data-sonner-theme="dark"] {
+  --normal-bg: rgba(22, 23, 28, 0.92);
+  --normal-border: rgba(255, 255, 255, 0.1);
+  --normal-text: #f4f4f5;
+
+  /* Rich Color: Success (Matrix / Cyber Emerald) */
+  --success-bg: rgba(6, 34, 22, 0.92);
+  --success-border: rgba(16, 185, 129, 0.35);
+  --success-text: #ecfdf5;
+
+  /* Rich Color: Error / Destructive (Security Breach Crimson) */
+  --error-bg: rgba(38, 12, 18, 0.92);
+  --error-border: rgba(244, 63, 94, 0.38);
+  --error-text: #fff1f2;
+
+  /* Rich Color: Warning (Amber Alert) */
+  --warning-bg: rgba(38, 22, 8, 0.92);
+  --warning-border: rgba(245, 158, 11, 0.38);
+  --warning-text: #fffbeb;
+
+  /* Rich Color: Info (Cyber Cyan) */
+  --info-bg: rgba(10, 26, 38, 0.92);
+  --info-border: rgba(14, 165, 233, 0.38);
+  --info-text: #f0f9ff;
+}
+
+/* Light mode crisp toast variables */
+:root [data-sonner-toaster],
+[data-sonner-toaster][data-sonner-theme="light"] {
+  --normal-bg: rgba(255, 255, 255, 0.96);
+  --normal-border: rgba(0, 0, 0, 0.08);
+  --normal-text: #09090b;
+
+  --success-bg: rgba(240, 253, 244, 0.96);
+  --success-border: rgba(74, 222, 128, 0.45);
+  --success-text: #064e3b;
+
+  --error-bg: rgba(255, 241, 242, 0.96);
+  --error-border: rgba(251, 113, 133, 0.45);
+  --error-text: #881337;
+
+  --warning-bg: rgba(254, 252, 232, 0.96);
+  --warning-border: rgba(250, 204, 21, 0.45);
+  --warning-text: #713f12;
+
+  --info-bg: rgba(240, 249, 255, 0.96);
+  --info-border: rgba(56, 189, 248, 0.45);
+  --info-text: #0c4a6e;
+}
+
+/* Enhanced Toast Container & Card Styling */
+[data-sonner-toast] {
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border-radius: 0.75rem !important;
+  font-family: var(--font-sans), system-ui, sans-serif !important;
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), opacity 300ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 200ms ease !important;
+}
+
+/* Dark Mode Toast Shadows & Glowing Cyber Accents */
+.dark [data-sonner-toast],
+[data-sonner-toaster][data-sonner-theme="dark"] [data-sonner-toast] {
+  box-shadow: 
+    0 14px 36px -4px rgba(0, 0, 0, 0.75),
+    0 4px 14px -2px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.08),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Success Glow */
+.dark [data-rich-colors="true"][data-sonner-toast][data-type="success"],
+[data-sonner-toaster][data-sonner-theme="dark"] [data-rich-colors="true"][data-sonner-toast][data-type="success"] {
+  box-shadow: 
+    0 14px 36px -4px rgba(0, 0, 0, 0.75),
+    0 0 24px -2px rgba(16, 185, 129, 0.25),
+    0 0 0 1px rgba(16, 185, 129, 0.35),
+    inset 0 1px 0 0 rgba(16, 185, 129, 0.3) !important;
+}
+
+/* Error Glow */
+.dark [data-rich-colors="true"][data-sonner-toast][data-type="error"],
+[data-sonner-toaster][data-sonner-theme="dark"] [data-rich-colors="true"][data-sonner-toast][data-type="error"] {
+  box-shadow: 
+    0 14px 36px -4px rgba(0, 0, 0, 0.75),
+    0 0 24px -2px rgba(244, 63, 94, 0.25),
+    0 0 0 1px rgba(244, 63, 94, 0.35),
+    inset 0 1px 0 0 rgba(244, 63, 94, 0.3) !important;
+}
+
+/* Warning Glow */
+.dark [data-rich-colors="true"][data-sonner-toast][data-type="warning"],
+[data-sonner-toaster][data-sonner-theme="dark"] [data-rich-colors="true"][data-sonner-toast][data-type="warning"] {
+  box-shadow: 
+    0 14px 36px -4px rgba(0, 0, 0, 0.75),
+    0 0 24px -2px rgba(245, 158, 11, 0.25),
+    0 0 0 1px rgba(245, 158, 11, 0.35),
+    inset 0 1px 0 0 rgba(245, 158, 11, 0.3) !important;
+}
+
+/* Info Glow */
+.dark [data-rich-colors="true"][data-sonner-toast][data-type="info"],
+[data-sonner-toaster][data-sonner-theme="dark"] [data-rich-colors="true"][data-sonner-toast][data-type="info"] {
+  box-shadow: 
+    0 14px 36px -4px rgba(0, 0, 0, 0.75),
+    0 0 24px -2px rgba(14, 165, 233, 0.25),
+    0 0 0 1px rgba(14, 165, 233, 0.35),
+    inset 0 1px 0 0 rgba(14, 165, 233, 0.3) !important;
+}
+
+/* Dark mode Close Button Styling */
+.dark [data-sonner-toast] [data-close-button],
+[data-sonner-toaster][data-sonner-theme="dark"] [data-sonner-toast] [data-close-button] {
+  background: rgba(28, 30, 36, 0.95) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  color: #a1a1aa !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4) !important;
+  transition: all 150ms ease !important;
+}
+
+.dark [data-sonner-toast] [data-close-button]:hover,
+[data-sonner-toaster][data-sonner-theme="dark"] [data-sonner-toast] [data-close-button]:hover {
+  background: rgba(45, 48, 58, 1) !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
+  color: #ffffff !important;
+}
+
+/* Description text in dark mode */
+.dark [data-sonner-toast] [data-description],
+[data-sonner-toaster][data-sonner-theme="dark"] [data-sonner-toast] [data-description] {
+  color: #a1a1aa !important;
+  font-size: 11px !important;
+}
+.dark [data-rich-colors="true"][data-sonner-toast] [data-description],
+[data-sonner-toaster][data-sonner-theme="dark"] [data-rich-colors="true"][data-sonner-toast] [data-description] {
+  color: inherit !important;
+  opacity: 0.85 !important;
+}
